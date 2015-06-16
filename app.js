@@ -1,10 +1,7 @@
 var app = require('./config/express')();
+var home = require('./app/routes/home');
 
-app.get('/', function (req, res) {
-    res.render('pages/index', {
-        nome2: "alberto luiz"
-    });
-});
+home(app)
 
 var server = app.listen(3000, function () {
 
