@@ -1,7 +1,4 @@
 var app = require('./config/express')();
-var home = require('./app/routes/home');
-
-home(app)
 
 var server = app.listen(3000, function () {
 
