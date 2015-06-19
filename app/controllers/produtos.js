@@ -10,8 +10,10 @@ module.exports = function(app) {
         //precisa disso? tem algum jeito mais facil?
         livro.preco = Number(livro.preco);
 
+
         var tx = connection.beginTransaction(function(exception){
-            var livroDao = app.livroDao(connection);
+            var livroDao = new app.livroDao(connection);
+
             livroDao.salva(livro);
             
             connection.commit(function(err) {
