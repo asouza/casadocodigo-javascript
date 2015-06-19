@@ -10,19 +10,34 @@ module.exports = function(app) {
         //precisa disso? tem algum jeito mais facil?
         livro.preco = Number(livro.preco);
 
-
         var tx = connection.beginTransaction(function(exception){
             var livroDao = new app.livroDao(connection);
 
-            livroDao.salva(livro);
-            
-            connection.commit(function(err) {
-                console.log("comitando");
+            livroDao.salva(livro,function(exception,result){
+
+                connection.commit(function(err) {
+                    console.log("comitando");
+                });
+
             });
+
         });
-
-
-        res.render("produtos/ok");
+        res.redirect("/produtos");
     };
+
+    controller.lista = function(req,res) {
+
+        var connection = app.connectionFactory();
+        connection.beginTransaction(function(ex){
+            var livroDao = new app.livroDao(connection);
+            livroDao.lista(function(error,results,fields){
+                console.log("chegando aqui4");
+                //console.log(fields);
+                res.render("produtos/lista",{lista:results})
+                connection.commit();
+
+            })
+        });
+    }
     return controller;
 }
