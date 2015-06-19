@@ -11,10 +11,9 @@ module.exports = function(app) {
         livro.preco = Number(livro.preco);
 
         var tx = connection.beginTransaction(function(exception){
-            var query = connection.query('INSERT INTO livros SET ?', livro, function(err, result) {
-                console.log(err);
-            });
-
+            var livroDao = app.livroDao(connection);
+            livroDao.salva(livro);
+            
             connection.commit(function(err) {
                 console.log("comitando");
             });
