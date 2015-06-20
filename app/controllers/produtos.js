@@ -35,16 +35,14 @@ module.exports = function(app) {
 
                 var accept = req.accepts(['html', 'json']);
 
-                switch(accept) {
-                    case "json" :
-                        res.json(results);
-                        break;
-                    case "html" :
+                res.format({
+                    html: function(){
                         res.render("produtos/lista",{lista:results});
-                        break;
-                }
-
-
+                    },
+                    json: function(){
+                        res.json(results);
+                    }
+                });
 
                 connection.commit();
 
