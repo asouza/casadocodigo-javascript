@@ -7,6 +7,10 @@ module.exports = function(app) {
     controller.salva = function(req,res) {
         var connection = app.connectionFactory();
         var livro = req.body;
+
+        console.log("============");
+        console.log(livro);
+
         //precisa disso? tem algum jeito mais facil?
         livro.preco = Number(livro.preco);
 
