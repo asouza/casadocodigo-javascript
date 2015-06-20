@@ -1,4 +1,4 @@
-var validator = require('validator');
+var util = require('util')
 
 module.exports = function(app) {
     var controller = {};
@@ -9,18 +9,18 @@ module.exports = function(app) {
     controller.salva = function(req,res) {
         var livro = req.body;
 
-        if(!validator.isLength(livro.titulo,5,10)){
-            res.status(400).send("titulo invalido");
-            return;
-        }
-        if(!validator.isFloat(livro.preco)){
-            res.status(400).send("preco deve ser um numero");
+        req.assert('titulo', 'Titulo deve ser preenchido').notEmpty();
+        req.assert('preco','Preco deve ser um número').isFloat();
+
+        var errors = req.validationErrors();
+        if(errors){
+            res.status(400).send(util.inspect(errors));
             return ;
         }
 
         var connection = app.connectionFactory();
         //precisa disso? tem algum jeito mais facil?
-        livro.preco = Number(livro.preco);
+        livro.preco = req.sanitize("preco").toFloat();
 
         var tx = connection.beginTransaction(function(exception){
             var livroDao = new app.livroDao(connection);
