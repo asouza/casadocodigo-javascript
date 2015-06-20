@@ -32,8 +32,20 @@ module.exports = function(app) {
             var livroDao = new app.livroDao(connection);
             livroDao.lista(function(error,results,fields){
                 console.log("chegando aqui4");
-                //console.log(fields);
-                res.render("produtos/lista",{lista:results})
+
+                var accept = req.accepts(['html', 'json']);
+
+                switch(accept) {
+                    case "json" :
+                        res.json(results);
+                        break;
+                    case "html" :
+                        res.render("produtos/lista",{lista:results});
+                        break;
+                }
+
+
+
                 connection.commit();
 
             })
