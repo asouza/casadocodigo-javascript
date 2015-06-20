@@ -1,3 +1,5 @@
+var validator = require('validator');
+
 module.exports = function(app) {
     var controller = {};
     controller.form = function(req, res) {
@@ -5,9 +7,18 @@ module.exports = function(app) {
     };
 
     controller.salva = function(req,res) {
-        var connection = app.connectionFactory();
         var livro = req.body;
-        
+
+        if(!validator.isLength(livro.titulo,5,10)){
+            res.status(400).send("titulo invalido");
+            return;
+        }
+        if(!validator.isFloat(livro.preco)){
+            res.status(400).send("preco deve ser um numero");
+            return ;
+        }
+
+        var connection = app.connectionFactory();
         //precisa disso? tem algum jeito mais facil?
         livro.preco = Number(livro.preco);
 

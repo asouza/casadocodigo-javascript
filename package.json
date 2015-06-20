@@ -13,6 +13,7 @@
     "db-migrate": "^0.9.16",
     "ejs": "^2.3.1",
     "express": "^4.12.4",
-    "express-load": "^1.1.14"
+    "express-load": "^1.1.14",
+    "mysql": "^2.7.0"
   }
 }
