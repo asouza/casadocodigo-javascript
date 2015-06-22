@@ -1,5 +1,3 @@
-var util = require('util')
-
 module.exports = function(app) {
     var controller = {};
     controller.form = function(req, res) {
@@ -14,7 +12,7 @@ module.exports = function(app) {
 
         var errors = req.validationErrors();
         if(errors){
-            res.status(400).send(util.inspect(errors));
+            res.status(400).send(errors);
             return ;
         }
 
