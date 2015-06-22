@@ -14,6 +14,13 @@ module.exports = function() {
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
     app.use(expressValidator());
+    app.use("/produtos/:id",function (req, res, next) {
+        if(!req.query.logado){
+            res.status(401).send("nao autorizado");
+            return ;
+        }
+        next();
+    });
 
     load('models', {cwd: 'app'})
         .then('controllers')
