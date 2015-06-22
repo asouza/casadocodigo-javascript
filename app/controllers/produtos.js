@@ -26,6 +26,9 @@ module.exports = function(app) {
             var livroDao = new app.livroDao(connection);
 
             livroDao.salva(livro,function(exception,result){
+                if(!exception) {
+                    res.redirect("/produtos");
+                }
 
                 connection.commit(function(err) {
                     console.log("comitando");
@@ -34,7 +37,6 @@ module.exports = function(app) {
             });
 
         });
-        res.redirect("/produtos");
     };
 
     controller.lista = function(req,res) {
@@ -59,6 +61,20 @@ module.exports = function(app) {
                 connection.commit();
 
             })
+        });
+    }
+
+    controller.buscaPorId = function(req,res) {
+        var connection = app.connectionFactory();
+        var livroDao = new app.livroDao(connection);
+
+        livroDao.buscaPorId(req.params.id,function(error,results,fields){
+            if(results.length == 0){
+                res.status(404).send();
+                return ;
+            }
+            res.json(results);
+            connection.end();
         });
     }
     return controller;

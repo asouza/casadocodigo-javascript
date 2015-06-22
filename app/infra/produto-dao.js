@@ -8,6 +8,10 @@ module.exports = function(app) {
         this.lista = function(callback) {
             connection.query('select * from livros',callback);
         }
+
+        this.buscaPorId = function (id,callback) {
+            connection.query("select * from livros where id = ?",[id],callback);
+        }
         return this;
     }
 }
