@@ -15,10 +15,10 @@ module.exports = function() {
     app.use(bodyParser.json());
     app.use(expressValidator());
     app.use("/produtos/:id",function (req, res, next) {
-        if(!req.query.logado){
-            res.status(401).send("nao autorizado");
-            return ;
-        }
+        //if(!req.query.logado){
+        //    res.status(401).send("nao autorizado");
+        //    return ;
+        //}
         next();
     });
 

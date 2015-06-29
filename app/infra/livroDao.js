@@ -3,16 +3,16 @@ function ProdutoDao(connection) {
 }
 
 ProdutoDao.prototype.salva = function(livro,callback) {
-    this.connection.query('INSERT INTO livros SET ?', livro, callback);
+    this._connection.query('INSERT INTO livros SET ?', livro, callback);
 }
 
 ProdutoDao.prototype.lista = lista = function(callback) {
-    connection.query('select * from livros',callback);
+    this._connection.query('select * from livros',callback);
 }
 
 ProdutoDao.prototype.buscaPorId = function (id,callback) {
-    connection.query("select * from livros where id = ?",[id],callback);
+    this._connection.query("select * from livros where id = ?",[id],callback);
 }
-module.exports = function(app) {
+module.exports = function() {
     return ProdutoDao;
 }
