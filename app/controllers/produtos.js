@@ -29,13 +29,15 @@ module.exports = function(app) {
             }
         });
 
+        connection.end();
+
 
     };
 
     controller.lista = function(req,res) {
 
         var connection = app.infra.connectionFactory();
-        connection.beginTransaction(function(ex){
+
             var livroDao = new app.infra.livroDao(connection);
             livroDao.lista(function(error,results,fields){
 
@@ -51,10 +53,8 @@ module.exports = function(app) {
                     }
                 });
 
-                connection.commit();
-
             })
-        });
+        connection.end();
     }
 
     controller.buscaPorId = function(req,res) {
@@ -67,8 +67,9 @@ module.exports = function(app) {
                 return ;
             }
             res.json(results);
-            connection.end();
         });
+
+        connection.end();
     }
     return controller;
 }
