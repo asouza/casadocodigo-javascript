@@ -12,7 +12,6 @@ module.exports = function() {
     app.set('views','./app/views');
 
     app.use(bodyParser.urlencoded({extended: true}));
-    app.use(bodyParser.json());
     app.use(expressValidator());
     app.use("/produtos/:id",function (req, res, next) {
         //if(!req.query.logado){
@@ -22,8 +21,7 @@ module.exports = function() {
         next();
     });
 
-    load('models', {cwd: 'app'})
-        .then('controllers')
+    load('controllers', {cwd: 'app'})
         .then('routes')
         .then('infra')
         .into(app);

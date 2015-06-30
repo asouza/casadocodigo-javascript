@@ -20,21 +20,16 @@ module.exports = function(app) {
         //precisa disso? tem algum jeito mais facil?
         livro.preco = req.sanitize("preco").toFloat();
 
-        var tx = connection.beginTransaction(function(exception){
-            var livroDao = new app.infra.livroDao(connection);
 
-            livroDao.salva(livro,function(exception,result){
-                if(!exception) {
-                    res.redirect("/produtos");
-                }
+        var livroDao = new app.infra.livroDao(connection);
 
-                connection.commit(function(err) {
-                    console.log("comitando");
-                });
-
-            });
-
+        livroDao.salva(livro,function(exception,result){
+            if(!exception) {
+                res.redirect("/produtos");
+            }
         });
+
+
     };
 
     controller.lista = function(req,res) {
