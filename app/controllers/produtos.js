@@ -6,7 +6,6 @@ module.exports = function(app) {
 
     controller.salva = function(req,res) {
         var livro = req.body;
-        console.log(livro);
 
         req.assert('titulo', 'Titulo deve ser preenchido').notEmpty();
         req.assert('preco','Preco deve ser um número').isFloat();
@@ -17,7 +16,7 @@ module.exports = function(app) {
             return ;
         }
 
-        var connection = app.infra.connectionFactory;
+        var connection = app.infra.connectionFactory();
         //precisa disso? tem algum jeito mais facil?
         livro.preco = req.sanitize("preco").toFloat();
 
@@ -40,10 +39,9 @@ module.exports = function(app) {
 
     controller.lista = function(req,res) {
 
-        var connection = app.infra.connectionFactory;
+        var connection = app.infra.connectionFactory();
         connection.beginTransaction(function(ex){
             var livroDao = new app.infra.livroDao(connection);
-            console.log(livroDao);
             livroDao.lista(function(error,results,fields){
 
 
@@ -65,7 +63,7 @@ module.exports = function(app) {
     }
 
     controller.buscaPorId = function(req,res) {
-        var connection = app.infra.connectionFactory;
+        var connection = app.infra.connectionFactory();
         var livroDao = new app.infra.livroDao(connection);
 
         livroDao.buscaPorId(req.params.id,function(error,results,fields){
