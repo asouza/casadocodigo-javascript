@@ -1,7 +1,7 @@
 module.exports = function(app) {
     var controller = {};
     controller.form = function(req, res) {
-        res.render('produtos/form');
+        res.render('produtos/form',{validationErrors:[]});
     };
 
     controller.salva = function(req,res) {
@@ -12,7 +12,14 @@ module.exports = function(app) {
 
         var errors = req.validationErrors();
         if(errors){
-            res.status(400).send(errors);
+            res.format({
+               html: function(){
+                   res.status(400).render("produtos/form",{validationErrors:errors});
+               },
+               json: function(){
+                   res.status(400).send(errors);
+               }
+            });
             return ;
         }
 
