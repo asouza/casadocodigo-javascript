@@ -50,7 +50,7 @@ module.exports = function(app) {
 
 
                 var accept = req.accepts(['html', 'json']);
-
+                console.log("olha eu aqui");
                 res.format({
                     html: function(){
                         res.render("produtos/lista",{lista:results});

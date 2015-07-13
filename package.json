@@ -17,5 +17,8 @@
     "express-validator": "^2.12.1",
     "mocha": "^2.2.5",
     "mysql": "^2.7.0"
+  },
+  "devDependencies": {
+    "supertest": "^1.0.1"
   }
 }
