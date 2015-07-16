@@ -19,6 +19,7 @@
     "mysql": "^2.7.0"
   },
   "devDependencies": {
+    "should": "^7.0.2",
     "supertest": "^1.0.1"
   }
 }
