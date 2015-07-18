@@ -5,14 +5,18 @@ var should = require('should');
 
 describe('#ProdutosController', function() {
 
-    before(function() {
-        console.log("rodando algo antes de tudo");
-    });
+    var limpaTabelas = function(done) {
+        var conn = express.infra.connectionFactory();
+        conn.query("delete from livros",function(ex,result){
+            if(!ex) {
+                done();
+            }
+        });        
+    }
 
-    beforeEach(function() {
-        console.log("rodando algo antes de cada funcao");
+    beforeEach(function(done) {        
+        limpaTabelas();
     });
-
 
 
     it('#listagem de produtos json', function (done) {
