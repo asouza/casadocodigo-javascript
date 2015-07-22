@@ -1,11 +1,14 @@
 var express = require('express');
 var load = require('express-load');
 var bodyParser = require('body-parser');
-var expressValidator = require('express-validator')
+var expressValidator = require('express-validator');
 
 module.exports = function() {
 
     var app = express();
+
+    var http = require('http').Server(app);
+    var io = require('socket.io')(http);    
 
     app.use(express.static('./public'));
     app.set('view engine', 'ejs');
@@ -25,7 +28,7 @@ module.exports = function() {
     load('controllers', {cwd: 'app'})
         .then('routes')
         .then('infra')
-        .into(app);
+        .into(app,io);
 
 
     return app;
