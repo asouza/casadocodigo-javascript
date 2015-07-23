@@ -30,11 +30,9 @@
     </body>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        var socket = io("ws://localhost:3000/");
-        socket.on('novaPromocao', function (data) {
-            if(data.type == 'novaPromocao') {
-                document.location.href= "/produtos/"+data.livro.id+"?promocao="+data.mensagem;
-            }
+        var socket = io();
+        socket.on('novaPromocao', function (data) {            
+            document.location.href= "/produtos/"+data.livro.id+"?promocao="+data.mensagem;            
         });
     </script>
 </html>

@@ -4,10 +4,6 @@ var io = require('socket.io')(http);
 
 app.set('io',io);	
 
-io.on('connection', function(socket){
-	console.log("conectado");
-});
-
 var server = http.listen(3000, function () {
 
     var host = server.address().address;
