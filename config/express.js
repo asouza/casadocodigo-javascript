@@ -7,9 +7,6 @@ module.exports = function() {
 
     var app = express();
 
-    var http = require('http').Server(app);
-    var io = require('socket.io')(http);    
-
     app.use(express.static('./public'));
     app.set('view engine', 'ejs');
     app.set('views','./app/views');
@@ -28,7 +25,7 @@ module.exports = function() {
     load('controllers', {cwd: 'app'})
         .then('routes')
         .then('infra')
-        .into(app,io);
+        .into(app);
 
 
     return app;
