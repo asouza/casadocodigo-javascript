@@ -32,7 +32,9 @@
     <script>
         var socket = io("ws://localhost:3000/");
         socket.on('novaPromocao', function (data) {
-            document.location.href= "/produtos/"+data.livro.id+"?promocao="+data.mensagem;
+            if(data.type == 'novaPromocao') {
+                document.location.href= "/produtos/"+data.livro.id+"?promocao="+data.mensagem;
+            }
         });
     </script>
 </html>
