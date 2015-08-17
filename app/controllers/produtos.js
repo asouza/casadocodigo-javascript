@@ -46,9 +46,6 @@ module.exports = function(app) {
     var cont = 0;
     controller.lista = function(req,res) {
 
-        console.log("chegou aqui..."+(cont++));
-        sleep.sleep(10);
-        console.log("passou a espera")
         var connection = app.infra.connectionFactory();
 
             var livroDao = new app.infra.livroDao(connection);
