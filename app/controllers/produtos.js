@@ -30,6 +30,7 @@ module.exports = function(app) {
 
         var livroDao = new app.infra.livroDao(connection);
 
+
         livroDao.salva(livro,function(exception,result){
             if(!exception) {
                 res.redirect("/produtos");
@@ -41,8 +42,13 @@ module.exports = function(app) {
 
     };
 
+    var sleep = require('sleep');
+    var cont = 0;
     controller.lista = function(req,res) {
 
+        console.log("chegou aqui..."+(cont++));
+        sleep.sleep(10);
+        console.log("passou a espera")
         var connection = app.infra.connectionFactory();
 
             var livroDao = new app.infra.livroDao(connection);
