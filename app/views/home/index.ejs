@@ -1,4 +1,4 @@
-<html>
+<html ng-app="cdcApp">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -10,7 +10,7 @@
           rel="publisher"/>
     <title>Livros de Java, SOA, Android, iPhone, Ruby on Rails e
         muito mais - Casa do Código</title>
-    <link href="/css/home/cssbase-min.css"
+    <link href="/css/site/cssbase-min.css"
           rel="stylesheet" type="text/css" media="all"/>
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700'
           rel='stylesheet'/>
@@ -84,43 +84,46 @@
 </nav>
 
 <!-- inicio da listagem em si-->
-<section id="index-section" class="container middle">
+<section id="index-section" class="container middle" ng-controller="HomeController">
 
-        <ul id="home-highlight-collection">
+    <ul id="home-highlight-collection">
+        <li class="col-left" ng-repeat="livro in livrosDestaque">
+            <a href="linkDetalhe" class="block clearfix">
+                <img width="170" height="240" src="urlImagem" alt="{{livro.titulo}}" title="{{livro.titulo}}"/>
 
-                <li class="col-left"><a href="linkDetalhe"
-                                        class="block clearfix"> <img width="170" height="240"
-                                                                     src="urlImagem"
-                                                                     alt=" {book.title}" title="{book.title}"/>
-                        <h2 class="product-title">{book.title}</h2> <small
-                                class="buy-button">Lan&#231;amento!</small></a>
-                </li>
+                <h2 class="product-title">{{livro.titulo}}</h2>
+                <small class="buy-button">Lan&#231;amento!</small>
+            </a>
+        </li>
 
-        </ul>
+    </ul>
 
 
     <h1 class="cdc-call">Últimos dias com os preços promocionais.
         Aproveite!</h1>
 
-        <ul class="clearfix book-collection">
+    <ul class="clearfix book-collection">
+        <li ng-repeat="livro in outrosLivros">
+            <a href="linkDetalhe" class="block clearfix">
+                <h2 class="product-title">{{livro.titulo}}</h2>
+                <img width="143"
+                     height="202"
+                     src="linkImagemCapa"
+                     alt="{{livro.titulo}}"
+                     title="{{livro.titulo}}"/>
 
+                <small class="buy-button">Compre</small>
+            </a>
+        </li>
 
-                <li><a href="linkDetalhe" class="block clearfix">
-                        <h2 class="product-title">{book.title}</h2> <img width="143"
-                                                                          height="202"
-                                                                          src="linkImagemCapa"
-                                                                          alt="{book.title}"
-                                                                          title="{book.title}"/><small
-                                class="buy-button">Compre</small>
-                    </a></li>
-
-        </ul>
+    </ul>
 
     <h2 class="cdc-call">Diferenciais da Casa do Código</h2>
 
     <ul id="cdc-diferenciais" class="clearfix">
         <li class="col-left">
             <h3>E-books sem DRM. Leia onde quiser</h3>
+
             <p>
                 <span class="sprite" id="sprite-drm"></span> Nossos e-books não
                 possuem DRM, ou seja, você pode ler em qualquer computador, tablet
@@ -129,6 +132,7 @@
         </li>
         <li class="col-right">
             <h3>Autores de renome na comunidade</h3>
+
             <p>
                 <span class="sprite" id="sprite-renome"></span> Autores que
                 participam ativamente na comunidade com Open Source, listas de
@@ -137,6 +141,7 @@
         </li>
         <li class="col-left">
             <h3>Receba atualizações dos e-books</h3>
+
             <p>
                 <span class="sprite" id="sprite-atualizacoes"></span> Quando você
                 compra um e-book, automaticamente tem direito às atualizações e
@@ -145,13 +150,13 @@
         </li>
         <li class="col-right">
             <h3>Livros com curadoria da Caelum</h3>
+
             <p>
                 <span class="sprite" id="sprite-caelum"></span> Desenvolvedores
                 experientes que avaliam e revisam os livros constantemente.
             </p>
         </li>
     </ul>
-
 
 
 </section>
@@ -240,6 +245,7 @@
         </div>
     </div>
 </footer>
-
+<script src="/js/angular.min.js"></script>
+<script src="/js/controllers/homeController.js"></script>
 </body>
 </html>
