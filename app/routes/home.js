@@ -1,5 +1,5 @@
-var controller = require('../controllers/home')();
 module.exports = function(app) {
-    console.log(controller.index);
-    app.get("/",controller.index)
+    app.get("/",function(req, res) {
+        res.render('home/index');
+    });
 }
