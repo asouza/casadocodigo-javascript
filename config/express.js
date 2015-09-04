@@ -22,11 +22,5 @@ module.exports = function() {
         next();
     });
 
-    load('controllers', {cwd: 'app'})
-        .then('routes')
-        .then('infra')
-        .into(app);
-
-
     return app;
 };

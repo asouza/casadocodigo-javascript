@@ -1,4 +1,8 @@
 var app = require('./config/express')();
+var produtos = require("./app/routes/produtos")(app);
+var home = require('./app/routes/home')(app);
+var promocoes = require('./app/routes/promocoes')(app);
+
 var http = require('http').Server(app);
 var io = require('socket.io')(http);    
 

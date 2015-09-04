@@ -1,7 +1,6 @@
 var mysql  = require('mysql');
 
 module.exports = function() {
-        return function(){             	
         	if(!process.env.NODE_ENV){
 	            return mysql.createConnection({
 	                host     : 'localhost',
@@ -18,6 +17,5 @@ module.exports = function() {
 	                password : '',
 	                database : 'casadocodigo_nodejs_teste'
 	            });
-        	}        	
-        };
+        	}
 }

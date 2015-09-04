@@ -1,18 +1,16 @@
-function ProdutoDao(connection) {
+function LivroDao(connection) {
     this._connection = connection;
 }
 
-ProdutoDao.prototype.salva = function(livro,callback) {
+LivroDao.prototype.salva = function(livro,callback) {
     this._connection.query('INSERT INTO livros SET ?', livro, callback);
 }
 
-ProdutoDao.prototype.lista = lista = function(callback) {
+LivroDao.prototype.lista = lista = function(callback) {
     this._connection.query('select * from livros',callback);
 }
 
-ProdutoDao.prototype.buscaPorId = function (id,callback) {
+LivroDao.prototype.buscaPorId = function (id,callback) {
     this._connection.query("select * from livros where id = ?",[id],callback);
 }
-module.exports = function() {
-    return ProdutoDao;
-}
+module.exports = LivroDao;

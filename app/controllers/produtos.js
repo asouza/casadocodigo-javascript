@@ -1,3 +1,6 @@
+var connectionFactory = require('../infra/connectionFactory');
+var LivroDao = require('../infra/livroDao');
+
 module.exports = function(app) {
     var controller = {};
     controller.form = function(req, res) {
@@ -23,12 +26,11 @@ module.exports = function(app) {
             return ;
         }
 
-        var connection = app.infra.connectionFactory();
         //precisa disso? tem algum jeito mais facil?
         livro.preco = req.sanitize("preco").toFloat();
 
-
-        var livroDao = new app.infra.livroDao(connection);
+        var connection = connectionFactory();
+        var livroDao = new LivroDao(connection);
 
 
         livroDao.salva(livro,function(exception,result){
@@ -46,9 +48,8 @@ module.exports = function(app) {
     var cont = 0;
     controller.lista = function(req,res) {
 
-        var connection = app.infra.connectionFactory();
-
-            var livroDao = new app.infra.livroDao(connection);
+            var connection = connectionFactory();
+            var livroDao = new LivroDao(connection);
             livroDao.lista(function(error,results,fields){
 
 
@@ -68,8 +69,8 @@ module.exports = function(app) {
     }
 
     controller.buscaPorId = function(req,res) {
-        var connection = app.infra.connectionFactory();
-        var livroDao = new app.infra.livroDao(connection);
+        var connection = connectionFactory();
+        var livroDao = new LivroDao(connection);
 
         livroDao.buscaPorId(req.params.id,function(error,results,fields){
             if(results.length == 0){
