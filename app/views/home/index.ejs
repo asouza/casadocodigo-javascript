@@ -248,6 +248,13 @@
         </div>
     </div>
 </footer>
-<script src="/js/angular.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    socket.on('novaPromocao', function (data) {
+        //document.location.href= "/produtos/"+data.livro.id+"?promocao="+data.mensagem;
+        console.log(data.livro);
+    });
+</script>
 </body>
 </html>
