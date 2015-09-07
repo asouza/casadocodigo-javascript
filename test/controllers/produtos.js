@@ -1,7 +1,5 @@
 var express = require('../../config/express')()
-var assert = require("assert");
 var request = require('supertest')(express);
-var should = require('should');
 
 describe('#ProdutosController', function() {
 
