@@ -1,9 +1,9 @@
 module.exports = function(app) {
     app.get("/promocoes/form", function(req,res) {
         var connection = app.infra.connectionFactory();
-        var livroDao = new app.infra.LivroDao(connection);
+        var produtoDao = new app.infra.ProdutoDao(connection);
 
-        livroDao.lista(function(error,results){
+        produtoDao.lista(function(error,results){
             res.render('promocoes/form',{lista:results});
         });
 
