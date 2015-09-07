@@ -1,19 +1,20 @@
 var express = require('../../config/express')()
 var request = require('supertest')(express);
+var DatabaseCleaner = require('database-cleaner');
+var databaseCleaner = new DatabaseCleaner('mysql');
 
 describe('#ProdutosController', function() {
 
-    var limpaTabelas = function(done) {
-        var conn = express.infra.connectionFactory();
-        conn.query("delete from livros",function(ex,result){
-            if(!ex) {
-                done();
-            }
-        });        
-    }
+    beforeEach(function(done) {
+        databaseCleaner.clean(express.infra.connectionFactory(), function(){
+            done();
+        });
+    });
 
-    beforeEach(function(done) {        
-        limpaTabelas(done);
+    after(function(done) {
+        databaseCleaner.clean(express.infra.connectionFactory(), function(){
+            done();
+        });
     });
 
 
@@ -32,6 +33,13 @@ describe('#ProdutosController', function() {
 
     });
 
+    it('#cadastro de um novo produto com dados invalidos', function (done) {
+        request.post('/produtos')
+            .send({titulo:"",descricao:"livro de teste"})
+            .expect(400,done)
+
+    });
+
     it('#cadastro de um novo produto com tudo preenchido', function (done) {
         request.post('/produtos')
             .send({titulo:"novo livro",preco:20.50,descricao:"livro de teste"})
@@ -42,12 +50,6 @@ describe('#ProdutosController', function() {
 
     });
 
-    it('#cadastro de um novo produto com dados invalidos', function (done) {
-        request.post('/produtos')
-            .send({titulo:"",descricao:"livro de teste"})
-            .expect(400,done)
-
-    });
 
 
 

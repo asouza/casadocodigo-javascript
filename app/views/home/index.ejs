@@ -87,15 +87,16 @@
 <section id="index-section" class="container middle" ng-controller="HomeController">
 
     <ul id="home-highlight-collection">
-        <li class="col-left" ng-repeat="livro in livrosDestaque">
+        <%for(i=0; i<3; i++) {%>
+        <li class="col-left">
             <a href="linkDetalhe" class="block clearfix">
-                <img width="170" height="240" src="urlImagem" alt="{{livro.titulo}}" title="{{livro.titulo}}"/>
+                <img width="170" height="240" src="urlImagem" alt="<%=livros[i].titulo%>" title="<%=livros[i].titulo%>"/>
 
-                <h2 class="product-title">{{livro.titulo}}</h2>
+                <h2 class="product-title"><%=livros[i].titulo%></h2>
                 <small class="buy-button">Lan&#231;amento!</small>
             </a>
         </li>
-
+        <%}%>
     </ul>
 
 
@@ -103,18 +104,20 @@
         Aproveite!</h1>
 
     <ul class="clearfix book-collection">
-        <li ng-repeat="livro in outrosLivros">
-            <a href="linkDetalhe" class="block clearfix">
-                <h2 class="product-title">{{livro.titulo}}</h2>
-                <img width="143"
-                     height="202"
-                     src="linkImagemCapa"
-                     alt="{{livro.titulo}}"
-                     title="{{livro.titulo}}"/>
+        <%for(i=0; i<livros.length; i++) {%>
+            <li>
+                <a href="linkDetalhe" class="block clearfix">
+                    <h2 class="product-title"><%=livros[i].titulo%></h2>
+                    <img width="143"
+                         height="202"
+                         src="linkImagemCapa"
+                         alt="<%=livros[i].titulo%>"
+                         title="<%=livros[i].titulo%>"/>
 
-                <small class="buy-button">Compre</small>
-            </a>
-        </li>
+                    <small class="buy-button">Compre</small>
+                </a>
+            </li>
+        <%}%>
 
     </ul>
 
@@ -246,6 +249,5 @@
     </div>
 </footer>
 <script src="/js/angular.min.js"></script>
-<script src="/js/controllers/homeController.js"></script>
 </body>
 </html>

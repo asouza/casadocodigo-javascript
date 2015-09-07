@@ -6,7 +6,7 @@ ProdutoDao.prototype.salva = function(livro,callback) {
     this._connection.query('INSERT INTO livros SET ?', livro, callback);
 }
 
-ProdutoDao.prototype.lista = lista = function(callback) {
+ProdutoDao.prototype.lista = function(callback) {
     this._connection.query('select * from livros',callback);
 }
 
