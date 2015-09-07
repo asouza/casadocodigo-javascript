@@ -22,5 +22,9 @@ module.exports = function() {
         next();
     });
 
+    load('routes',{cwd: 'app',verbose:true})
+        .then('infra')
+        .into(app);
+
     return app;
 };

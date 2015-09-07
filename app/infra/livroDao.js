@@ -13,4 +13,5 @@ LivroDao.prototype.lista = lista = function(callback) {
 LivroDao.prototype.buscaPorId = function (id,callback) {
     this._connection.query("select * from livros where id = ?",[id],callback);
 }
-module.exports = LivroDao;
+
+module.exports = function(){return LivroDao};

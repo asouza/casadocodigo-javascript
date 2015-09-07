@@ -1,6 +1,3 @@
-var connectionFactory = require('../infra/connectionFactory');
-var LivroDao = require('../infra/livroDao');
-
 module.exports = function(app) {
     app.get("/produtos/form",function(req, res) {
         res.render('produtos/form',{validationErrors:[]});
@@ -28,8 +25,8 @@ module.exports = function(app) {
         //precisa disso? tem algum jeito mais facil?
         livro.preco = req.sanitize("preco").toFloat();
 
-        var connection = connectionFactory();
-        var livroDao = new LivroDao(connection);
+        var connection = app.infra.connectionFactory();
+        var livroDao = new app.infra.LivroDao(connection);
 
 
         livroDao.salva(livro,function(exception,result){
@@ -46,8 +43,9 @@ module.exports = function(app) {
 
     app.get("/produtos",function(req,res) {
 
-        var connection = connectionFactory();
-        var livroDao = new LivroDao(connection);
+        var connection = app.infra.connectionFactory();
+        var livroDao = new app.infra.LivroDao(connection);
+
         livroDao.lista(function(error,results,fields){
 
 
@@ -67,8 +65,8 @@ module.exports = function(app) {
     });
 
     app.get("/produtos/:id",function(req,res) {
-        var connection = connectionFactory();
-        var livroDao = new LivroDao(connection);
+        var connection = app.infra.connectionFactory();
+        var livroDao = new app.infra.LivroDao(connection);
 
         livroDao.buscaPorId(req.params.id,function(error,results,fields){
             if(results.length == 0){
