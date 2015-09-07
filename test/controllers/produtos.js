@@ -15,7 +15,7 @@ describe('#ProdutosController', function() {
     }
 
     beforeEach(function(done) {        
-        limpaTabelas();
+        limpaTabelas(done);
     });
 
 
@@ -39,7 +39,6 @@ describe('#ProdutosController', function() {
             .send({titulo:"novo livro",preco:20.50,descricao:"livro de teste"})
             .expect(302)
             .end(function(err,response){
-
                 done();
             })
 
