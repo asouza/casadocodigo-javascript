@@ -1,6 +1,6 @@
 module.exports = function(app) {
     app.get("/produtos/form",function(req, res) {
-        res.render('produtos/form',{validationErrors:[]});
+        res.render('produtos/form');
     });
 
     app.post("/produtos",function(req,res) {
@@ -21,9 +21,6 @@ module.exports = function(app) {
             });
             return ;
         }
-
-        //precisa disso? tem algum jeito mais facil?
-        produto.preco = req.sanitize("preco").toFloat();
 
         var connection = app.infra.connectionFactory();
         var produtoDao = new app.infra.ProdutoDao(connection);
