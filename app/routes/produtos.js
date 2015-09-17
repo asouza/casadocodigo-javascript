@@ -1,19 +1,21 @@
 module.exports = function(app) {
     app.get("/produtos/form",function(req, res) {
-        res.render('produtos/form');
+        res.render('produtos/form',{produto:{},validationErrors:{}});
     });
 
     app.post("/produtos",function(req,res) {
         var produto = req.body;
+        console.log(produto);
 
-        req.assert('titulo', 'Titulo deve ser preenchido').notEmpty();
+        var validadorTitulo = req.assert('titulo', 'Titulo deve ser preenchido');
+        validadorTitulo.notEmpty();
         req.assert('preco','Preco deve ser um número').isFloat();
 
         var errors = req.validationErrors();
         if(errors){
             res.format({
                 html: function(){
-                    res.status(400).render("produtos/form",{validationErrors:errors});
+                    res.status(400).render("produtos/form",{validationErrors:errors,produto:produto});
                 },
                 json: function(){
                     res.status(400).send(errors);
@@ -46,8 +48,6 @@ module.exports = function(app) {
         produtoDao.lista(function(error,results,fields){
 
 
-            var accept = req.accepts(['html', 'json']);
-            console.log("olha eu aqui");
             res.format({
                 html: function(){
                     res.render("produtos/lista",{lista:results});
