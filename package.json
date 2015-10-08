@@ -24,5 +24,8 @@
   "devDependencies": {
     "should": "^7.0.2",
     "supertest": "^1.0.1"
+  },
+  "engines": {
+    "node": "0.12.4"
   }
 }
