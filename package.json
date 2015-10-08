@@ -26,7 +26,7 @@
     "node": "0.12.4"
   },
   "scripts": {
-    "start": "NODE_ENV=production node app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 
