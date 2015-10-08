@@ -4,7 +4,8 @@ var io = require('socket.io')(http);
 
 app.set('io',io);	
 
-var server = http.listen(3000, function () {
+var porta = process.env.PORT || 3000;
+var server = http.listen(porta, function () {
 
     var host = server.address().address;
     var port = server.address().port;
